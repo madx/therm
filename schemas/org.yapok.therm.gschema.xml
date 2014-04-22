@@ -1,0 +1,60 @@
+<schemalist>
+  <schema id="org.yapok.Therm" path="/org/yapok/Therm/" gettext-domain="therm">
+
+    <key name="font" type="s">
+      <default>"Droid Sans Mono 10"</default>
+      <summary>Font</summary>
+      <description>
+        Font used by the terminal widget.
+      </description>
+    </key>
+
+    <key name="foreground-color" type="s">
+      <default>"#e8e8d3"</default>
+      <summary>Foreground color</summary>
+      <description>
+        Color used for normal text foreground.
+      </description>
+    </key>
+
+    <key name="background-color" type="s">
+      <default>"#151515"</default>
+      <summary>Background color</summary>
+      <description>
+        Color used for normal text background.
+      </description>
+    </key>
+
+    <key name="palette" type="as">
+      <default>
+        [
+          "#151515", "#e5393d", "#64dd4a", "#ff9700",
+          "#0098dc", "#c64ae1", "#d5d7ff", "#e8e8d3",
+          "#28292a", "#e5393d", "#64dd4a", "#ff9700",
+          "#0098dc", "#c64ae1", "#d5d7ff", "#e8e8d3"
+        ]
+      </default>
+      <summary>Palette</summary>
+      <description>
+        Color palette.
+      </description>
+    </key>
+
+    <key name="word-chars" type="s">
+      <default>"-A-Za-z0-9_$.,&amp;=?/~#%"</default>
+      <summary>Word chars</summary>
+      <description>
+        Characters that can belong to a word (used for text selection).
+      </description>
+    </key>
+
+    <key name="uri-regex" type="s">
+      <default>"\\b(?:[a-z0-9][a-z0-9+.-]+):(?://)?\\S+\\b"</default>
+      <summary>URI Regex</summary>
+      <description>
+        Regex pattern used to match URIs.
+      </description>
+    </key>
+
+  </schema>
+</schemalist>
