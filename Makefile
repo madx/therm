@@ -1,7 +1,7 @@
 RELEASE?=0
 
 VALAC=valac
-VALA_FLAGS=--pkg vte-2.90 --fatal-warnings
+VALA_FLAGS=--pkg vte-2.90 --pkg gtk+-3.0 --pkg gdk-3.0 --fatal-warnings
 ifeq ($(RELEASE), 1)
 	VALA_FLAGS+=-X -O2
 endif

@@ -24,7 +24,7 @@ using Gtk;
 using Vte;
 using Pango;
 
-static const string APPLICATION_ID = "org.yapok.Therm";
+static const string APPLICATION_ID = "org.yapok.Therm2";
 
 public static int main(string[] args)
 {
@@ -36,10 +36,11 @@ class Therm : Gtk.Application {
   string cwd = GLib.Environment.get_home_dir();
 
   protected Pango.FontDescription font;
-  protected Gdk.Color[] palette;
-  protected Gdk.Color   foreground_color;
-  protected Gdk.Color   background_color;
+  protected Gdk.RGBA[]  palette;
+  protected Gdk.RGBA    foreground_color;
+  protected Gdk.RGBA    background_color;
   protected GLib.Regex  uri_regex;
+  protected int         margin_size;
   protected string      word_chars;
 
   public Therm() {
@@ -66,14 +67,14 @@ class Therm : Gtk.Application {
     font = Pango.FontDescription.from_string(font_string);
 
     // Set fore- and background
-    Gdk.Color.parse(settings.get_string("foreground-color"), out foreground_color);
-    Gdk.Color.parse(settings.get_string("background-color"), out background_color);
+    foreground_color.parse(settings.get_string("foreground-color"));
+    background_color.parse(settings.get_string("background-color"));
 
     // Set the color palette
     var hex_palette = settings.get_strv("palette");
     for (int i = 0; i < 16; i++) {
-      Gdk.Color color = Gdk.Color();
-      Gdk.Color.parse(hex_palette[i], out color);
+      Gdk.RGBA color = Gdk.RGBA();
+      color.parse(hex_palette[i]);
       palette += color;
     }
 
@@ -86,6 +87,10 @@ class Therm : Gtk.Application {
       GLib.assert_not_reached();
     }
 
+    // Set inner margin
+    margin_size = settings.get_int("margin-size");
+
+    // Set word chars
     word_chars = settings.get_string("word-chars");
   }
 
@@ -103,6 +108,9 @@ class Therm : Gtk.Application {
       this.cwd = cwd;
 
       term = new Terminal(app);
+
+      set_border_width(app.margin_size);
+      override_background_color(StateFlags.NORMAL, app.background_color);
 
       has_resize_grip = false;
       targs = { Vte.get_user_shell() };
@@ -153,7 +161,7 @@ class Therm : Gtk.Application {
       set_scrollback_lines(-1);
       pointer_autohide = true;
       set_font(app.font);
-      set_colors(app.foreground_color, app.background_color, app.palette);
+      set_colors_rgba(app.foreground_color, app.background_color, app.palette);
       set_word_chars(app.word_chars);
 
       button_press_event.connect(handle_button);

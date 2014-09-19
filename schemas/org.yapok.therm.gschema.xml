@@ -48,6 +48,14 @@
       </description>
     </key>
 
+    <key name="margin-size" type="i">
+      <default>4</default>
+      <summary>Margin size</summary>
+      <description>
+        Defines the inner margin (between the window border and the VTE border).
+      </description>
+    </key>
+
     <key name="uri-regex" type="s">
       <default>"\\b(?:[a-z0-9][a-z0-9+.-]+):(?://)?\\S+\\b"</default>
       <summary>URI Regex</summary>
